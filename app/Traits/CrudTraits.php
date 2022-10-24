@@ -2,10 +2,16 @@
 
 namespace App\Traits;
 
+use App\Models\QueryFilter\QueryFilters;
+
 trait CrudTraits
 {
-    public function list(){
-        return $this->model->paginate(20);
+    public function list(QueryFilters $filter = null){
+        $query = $this->model->query();
+        if($filter){
+            $query->filter($filter);
+        }
+        return $query->paginate(20);
     }
 
     public function save($data = []){

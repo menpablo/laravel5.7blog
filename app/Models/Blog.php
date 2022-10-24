@@ -2,12 +2,15 @@
 
 namespace App\Models;
 
+use App\Models\QueryFilter\Filterable;
 use App\Scopes\BlogListByRole;
 use Illuminate\Database\Eloquent\Model;
 
 class Blog extends Model
 {
-  /**
+    use Filterable;
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array
@@ -19,7 +22,7 @@ class Blog extends Model
 
     public function author()
     {
-        return $this->belongsTo('App\Models\User','user_id');
+        return $this->belongsTo('App\Models\User', 'user_id');
     }
 
     /**

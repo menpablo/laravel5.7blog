@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\BlogStoreRequest;
 use App\Models\Blog;
+use App\Models\Queryfilter\BlogFilter;
 use App\Services\Blog\BlogFacade;
 use Illuminate\Http\Request;
 
@@ -19,10 +20,10 @@ class BlogController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(BlogFilter $blogFilter)
     {
         //$this->authorize('work_with_users',Auth::user());
-        $blogs = BlogFacade::list();
+        $blogs = BlogFacade::list($blogFilter);
         return view('blogs.index')->with('blogs', $blogs);
     }
 
